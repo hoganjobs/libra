@@ -23,3 +23,5 @@ this.list.map(function (item) {
 - 使用计算属性过滤出要渲染的列表的项目，生成一个新列表数组；
 - 使用外层包裹元素进行v-if判断整个列表渲染；
 
+## Question 2 
+Vue组件data选项为什么必须是个函数而Vue的根实例则没有此限制？
