@@ -47,13 +47,19 @@ new Vue({
 
 6、补充，Vue.extend() 中 data 也必须是函数；
 
-## Question  3
+## Question 3
 你知道vue中key的作用和工作原理吗？说说你对它的理解。
 
 ### Answer: 
 
 
-## Question  4
+## Question 4
 你怎么理解vue中的diff算法？
+
+### Answer: 
+
+
+## Question 5
+谈一谈对vue组件化的理解？
 
 ### Answer: 
