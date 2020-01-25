@@ -63,3 +63,9 @@ new Vue({
 谈一谈对vue组件化的理解？
 
 ### Answer: 
+
+
+## Question 6
+谈一谈对vue的设计原则的理解？
+
+### Answer: 
