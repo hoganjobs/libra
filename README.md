@@ -46,3 +46,8 @@ new Vue({
 ```
 
 6、补充，Vue.extend() 中 data 也必须是函数；
+
+## Question  
+你知道vue中key的作用和工作原理吗？说说你对它的理解。
+
+### Answer: 
