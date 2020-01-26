@@ -72,4 +72,9 @@ new Vue({
 ## Question 6
 谈一谈对vue的设计原则的理解？
 
-### Answer: 
+### Answer:
+
+## Question 7
+vue为什么要求组件模板只能有一个根元素？
+
+### Answer:
