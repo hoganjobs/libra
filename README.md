@@ -98,3 +98,8 @@ new Vue({
 vue为什么要求组件模板只能有一个根元素？
 
 ### Answer:
+
+## Question 8
+谈谈你对MVC、MVP和MVVM的理解？
+
+### Answer:
