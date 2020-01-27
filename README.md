@@ -114,3 +114,29 @@ vue为什么要求组件模板只能有一个根元素？
 谈谈你对MVC、MVP和MVVM的理解？
 
 ### Answer:
+1、Model-View-Controller，所有通信都是单向的
+```
+模型（Model）：数据库相关的操作、文件的访问和数据结构等。
+
+视图（View）：专注于显示，用户界面，如Web前端（HTML/CSS/Java Script）
+
+控制器（Controller）：业务逻辑，连接模型和视图，如把视图的请求发送给模型或把数据返回给视图等
+```
+
+2、Model-View-Presenter，改变了通信方向，通信都是双向的；View 与 Model 不发生联系，都通过 Presenter 传递。View 不部署任何业务逻辑，称为"被动视图"（Passive View）
+```
+模型（Model）：数据库相关的操作、文件的访问和数据结构等。
+
+视图（View）：专注于显示，如Web前端（HTML/CSS/Java Script）
+
+展示器（Presenter）：连接模型和视图，处理视图的请求并根据模型更新视图
+```
+
+3、Model-View-ViewModel，双向绑定
+```
+模型（Model）：数据库相关的操作、文件的访问和数据结构等。
+
+视图（View）：专注于显示，用户界面，如Web前端（HTML/CSS/Java Script）
+
+视图模型（ViewModel）：连接模型和视图，视图模型和视图是双休绑定的。
+```
