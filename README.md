@@ -145,3 +145,68 @@ vue为什么要求组件模板只能有一个根元素？
 谈谈你对vue组件之间通信的理解？
 
 ### Answer:
+1、先盘点一下vue组件之间的通信：
+```
+props
+$emit / $on
+($parent / $children) / $refs
+vuex
+bus
+provide / inject
+$attrs / $listeners
+```
+
+2、常用的方式有props、vuex、事件总线bus；
+
+3、其他一些边界情况$parent、$children、 $refs、provide / inject；
+
+4、还有非props特性的$attrs、$listeners；
+
+5、常见的props，父组件通过props将数据下发给props，子组件通过$emit来触发自定义事件来通知父组件进行相应的操作；
+```
+// 子组件
+props: { msg: String }
+
+// 父组件
+<Children :msg="msg" v-on:changeMsg="changeMsg"/>
+```
+
+6、$parent/$children 都是通过获取父组件实例或子组件实例；
+```
+// 子组件
+this.$parent.changeMsg();
+
+// 父组件
+this.$children[0].msg;
+```
+
+7、$refs,给元素或子组件注册引用信息,引用信息将会注册在父组件的 $refs 对象上；
+```
+// 父组件
+this.$refs.child.msg;
+```
+
+8、provide、inject，能够实现祖先和后代之间传值，允许一个祖先组件向其所有子孙后代注入一个依赖,不论组件层次有多深,并在起上下文关系成立的时间里始终生效
+```
+// 孙/子组件
+inject: ['msg']
+
+// 父组件
+provide() {
+    return {
+        msg: this.msg
+    }
+}
+```
+
+9、$attrs，当一个组件没有声明任何 prop 时(没有在props声明属性)，这里会包含所有父作用域的绑定 ，并且可以通过 v-bind="$attrs" 传入内部组件；
+```
+// 孙组件
+{{$attrs.msg}}
+```
+
+10、$listeners，包含了父作用域中的 (不含 .native 修饰器的) v-on 事件监听器。它可以通过 v-on="$listeners" 传入内部组件；
+```
+// 子组件
+<Children v-bind="$attrs" v-on="$listeners"/>
+```
