@@ -210,3 +210,8 @@ provide() {
 // 子组件
 <Children v-bind="$attrs" v-on="$listeners"/>
 ```
+
+## Question 10
+你了解哪些vue性能优化方法？
+
+### Answer:
