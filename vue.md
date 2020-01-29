@@ -4,6 +4,25 @@
 v-if和v-for哪个优先级高？如果两个同时出现，应该怎么优化得到更好的性能？
 
 ### Answer: 
+源码compiler/codegen/index.js
+1、显然v-for优先于v-ifv-if别解析（在源码中index.js的64行）
+```
+  if (el.staticRoot && !el.staticProcessed) {
+    return genStatic(el, state)
+  } else if (el.once && !el.onceProcessed) {
+    return genOnce(el, state)
+  } else if (el.for && !el.forProcessed) {
+    return genFor(el, state)
+  } else if (el.if && !el.ifProcessed) {
+    return genIf(el, state)
+  } else if (el.tag === 'template' && !el.slotTarget && !state.pre) {
+    return genChildren(el, state) || 'void 0'
+  } else if ...
+```
+
+2、如果同时出现，每次渲染都会先执行循环再判断条件，无论如何循环都不可避免，浪费了性能
+
+3、要避免出现这种情况，则在外层嵌套template，在这一层进行v-ifv-if判断，然后在内部进行v-for循环
 
 ## Question 2 
 Vue组件data选项为什么必须是个函数而Vue的根实例则没有此限制？
