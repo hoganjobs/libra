@@ -5,6 +5,7 @@ v-if和v-for哪个优先级高？如果两个同时出现，应该怎么优化�
 
 ### Answer: 
 源码compiler/codegen/index.js
+
 1、显然v-for优先于v-ifv-if别解析（在源码中index.js的64行）
 ```
   if (el.staticRoot && !el.staticProcessed) {
@@ -28,6 +29,13 @@ v-if和v-for哪个优先级高？如果两个同时出现，应该怎么优化�
 Vue组件data选项为什么必须是个函数而Vue的根实例则没有此限制？
 
 ### Answer: 
+源码src\core\instance\state.js - initData()
+
+1、Vue组件可能存在多个实例，如果使用对象形式定义data，则会导致它们共用一个data对象，那么状态变更将影响所有组件实例，这是不合理的；
+
+2、采用函数形式定义，在initData时会将其作为工厂函数返回到全新data对象，有效规避多实例之间状态污染问题。
+
+3、而在Vue根实例创建过程中则不存在该限制，也是因为根实例只能有一个，不需要担心这种情况。
 
 ## Question 3
 你知道vue中key的作用和工作原理吗？说说你对它的理解。
