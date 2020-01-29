@@ -37,6 +37,12 @@ Vue组件data选项为什么必须是个函数而Vue的根实例则没有此限�
 
 3、而在Vue根实例创建过程中则不存在该限制，也是因为根实例只能有一个，不需要担心这种情况。
 
+```
+  data = vm._data = typeof data === 'function'
+    ? getData(data, vm)
+    : data || {}
+```
+
 ## Question 3
 你知道vue中key的作用和工作原理吗？说说你对它的理解。
 
@@ -49,10 +55,41 @@ Vue组件data选项为什么必须是个函数而Vue的根实例则没有此限�
 
 3、vue中在使用相同标签名元素的过渡切换时，也会使用到key属性，其目的也是为了让vue可以区分它们，否则vue只会替换其内部属性而不会触发过渡效果。
 
+```
+bredkpoint:
+oldStartVnode.tag==='p'
+
+else if (sameVnode(oldStartVnode, newStartVnode)) {
+    patchVnode(oldStartVnode, newStartVnode, insertedVnodeQueue, newCh, newStartIdx)
+    oldStartVnode = oldCh[++oldStartIdx]
+    newStartVnode = newCh[++newStartIdx]
+}
+
+```
+
 ## Question 4
 你怎么理解vue中的diff算法？
 
 ### Answer: 
+源码分析1: 必要性，lifecyle.js - mountComponent()
+
+组件中可能存在很多个data中的key使用
+
+源码分析2: 执行方式，patch.js - patchVnode()
+
+patchVnode是diff算法发生的地方，整体策略：深度优先，同层比较
+
+源码分析3: 高效性，patch.js - updateChildren()
+
+3W1H原则答
+
+1、diff算法是虚拟DOM技术的必然产物：通过新旧虚拟DOM作对比（即diff），将变化的地方更新在真实DOM上；另外，也需要diff高效的执行对比过程，从而降低时间复杂度为0(n)。
+
+2、vue 2.x 中为了降低 Watcher 粒度，每个组件只有一个Watcher与之对应，只有引入diff才能精确找到发生变化的地方。
+
+3、vue中diff执行的时刻是组件实例执行其更新函数时，它会对比上一次渲染结果oldVnode和新的渲染结果newVnode，此过程称为patch。
+
+4、diff过程整体遵循深度优先、同层比较的策略；两个节点之间比较会根据它们是否拥有子节点或者文本节点做不同操作；比较两组子节点是算法的重点，首先假设头尾节点可能相同做4次尝试，如果没有找到相同节点才按照通用方式遍历查找，查找结束再按情况处理剩下的节点；借助key通常可以非常精确找到相同节点，因此整个patch过程非常高效。
 
 ## Question 5
 谈一谈对vue组件化的理解？
