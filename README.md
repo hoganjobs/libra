@@ -215,3 +215,43 @@ provide() {
 你了解哪些vue性能优化方法？
 
 ### Answer:
+1、v-for 遍历避免同时使用 v-if，在外层包裹进行判断或通过computed过滤出新的渲染列表；
+```
+<template v-if="isFodlder">
+  <p v-for="item in list">{{item.title}}</p>
+</template>
+
+this.list.map(function (item) {
+  if (item.isActive) {
+    return item.content
+  }
+})
+```
+
+2、事件的销毁，使用 addEventListene 等方式添加的事件要手动移除
+```
+created() {
+  addEventlistener('click', this.click, false)
+},
+beforeDestroy() {
+  removeEventListener('click', this.click, false);
+}
+```
+
+3、图片资源懒加载，使用vue-lazyload 等插件对图片资源进行懒加载处理，优化页面加载性能；
+
+4、路由懒加载；
+```
+const Foo = () => import('./Foo.vue');
+
+const routes = [
+  {
+    path: '/foo',
+    component: Foo
+  }
+]
+
+const router = new VueRouter({
+  routes
+})
+```
