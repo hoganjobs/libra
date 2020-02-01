@@ -304,7 +304,7 @@ var CompB = {
 }
 ```
 
-## Question 12
+## Question 13
 watch和computed的区别以及怎么选用?
 
 ### Answer:
