@@ -272,3 +272,44 @@ const router = new VueRouter({
 vue如果想扩展某个现有的组件时应该怎么做？
 
 ### Answer:
+1、使用mixin混入的方式：
+```
+// 定义一个混入对象
+var myMixin = {
+  created: function () {
+    this.hello()
+  },
+  methods: {
+    hello: function () {
+      console.log('hello from mixin!')
+    }
+  }
+}
+
+// 定义一个使用混入对象的组件
+var Component = Vue.extend({
+  mixins: [myMixin]
+})
+var component = new Component()
+```
+
+2、使用extends声明扩展另一个组件
+```
+var CompA = { ... }
+
+// 在没有调用 `Vue.extend` 时候继承 CompA
+var CompB = {
+  extends: CompA,
+  ...
+}
+```
+
+## Question 12
+watch和computed的区别以及怎么选用?
+
+### Answer:
+1、watch是对数据的变化作出反应，computed是为了应对复杂的逻辑计算；
+
+2、watch没有缓存概念，computed是有缓存的；
+
+3、当需要在数据变化时执行异步或开销较大的操作时，选用watch；
