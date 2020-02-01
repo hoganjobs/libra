@@ -214,3 +214,13 @@ SSR
 你知道vue3有哪些新特性吗？它们会带来什么影响？
 
 ### Answer:
+
+## Question 12
+vue如果想扩展某个现有的组件时应该怎么做？
+
+### Answer:
+
+## Question 13
+watch和computed的区别以及怎么选用?
+
+### Answer:
