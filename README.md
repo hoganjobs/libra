@@ -313,3 +313,31 @@ watch和computed的区别以及怎么选用?
 2、watch没有缓存概念，computed是有缓存的；
 
 3、当需要在数据变化时执行异步或开销较大的操作时，选用watch；
+
+## Question 13
+谈谈你对vue生命周期的理解？
+
+### Answer:
+1、vue生命周期包括：创建、挂载、更新、销毁
+```
+beforeCreate()
+create()
+beforeMount()
+mounted()
+beforeUpdate()
+updated()
+beforeDestroy()
+destroyed()
+```
+
+2、在beforeCreate前完成Vue实例的初始化事件以及生命周期；
+
+3、在create前，挂载data，绑定事件；
+
+4、在beforeMount前完成虚拟dom的创建；
+
+5、在mounted时将虚拟dom挂载到页面，完成真实dom的创建；
+
+6、每次数据变化触发beforeUpdate、updated更新操作；
+
+7、销毁函数或组件被销毁时触发beforeDestroy、destroyed；
